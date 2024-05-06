@@ -183,7 +183,6 @@
         }
 
         team_s_form.addEventListener('submit', function(e) {
-            e.stopPropagation();
             e.preventDefault();
             add_member();
 
