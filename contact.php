@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Login Model -About Us
-    </title>
+
     <style>
 
 
@@ -14,6 +12,8 @@
     <?php
     require('include/links.php');
     ?>
+    <title> <?php echo $settings_r['site_title'] ?> - Contact</title>
+
 
     <!-- swiperJs CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -32,7 +32,7 @@
             ducimus quas quos! Quaerat repellat voluptates fugit nihil corrupti.</p>
     </div>
 
-    
+
     <?php
     $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no` =?";
     $values = [1];
@@ -100,26 +100,26 @@
                             <label class="form-label" style="font-weight:500">
                                 Name:
                             </label>
-                            <input type="text" name="name" class="form-control shadow-none">
+                            <input type="text" name="name" class="form-control shadow-none" required>
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight:500">
                                 Email:
                             </label>
-                            <input type="text" name="email" class="form-control shadow-none">
+                            <input type="text" name="email" class="form-control shadow-none" required>
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight:500">
                                 Subject:
                             </label>
-                            <input type="text" name="subject" class="form-control shadow-none">
+                            <input type="text" name="subject" class="form-control shadow-none" required>
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight:500">
                                 Message:
                             </label>
-                            <textarea class="form-control shadow-none " name="message" rows="5" style="resize:none;"></textarea>
-                            <button type="submit" name="send"  class="btn btn-dark shadow-none mt-2">
+                            <textarea class="form-control shadow-none " required name="message" rows="5" style="resize:none;"></textarea>
+                            <button type="submit" name="send" class="btn btn-dark shadow-none mt-2">
                                 SEND
                             </button>
                         </div>
@@ -127,21 +127,19 @@
                 </div>
             </div>
 
-            <?php 
-            if(isset($_POST['send']))
-            {
+            <?php
+            if (isset($_POST['send'])) {
                 $frm_data = filteration($_POST);
-                $q="INSERT INTO `user_queries`(`name`, `email`, `subject`, `message`) VALUES (?,?,?,?)";
-                $values= [$frm_data['name'], $frm_data['email'], $frm_data['subject'], $frm_data['message']];
-                $res = insert($q,$values,'ssss');
-                if($res==1){
-                    alert('success',"Message sent!");
-                }
-                else{
-                    alert('error',"Something went wrong Try again!");
+                $q = "INSERT INTO `user_queries`(`name`, `email`, `subject`, `message`) VALUES (?,?,?,?)";
+                $values = [$frm_data['name'], $frm_data['email'], $frm_data['subject'], $frm_data['message']];
+                $res = insert($q, $values, 'ssss');
+                if ($res == 1) {
+                    alert('success', "Message sent!");
+                } else {
+                    alert('error', "Something went wrong Try again!");
                 }
             }
-            
+
             ?>
 
 

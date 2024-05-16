@@ -1,5 +1,5 @@
 <div class="container-fluid bg-dark text-light p-3 d-flex justify-content-between align-items-center sticky-top">
-        <h3 class="mb-0">Hotel Management System-Admin</h3>
+        <h3 class="mb-0">GoHiking-Admin</h3>
         <a href="logout.php" class="btn btn-sm btn-light">Logout</a>
     </div>
 
@@ -18,9 +18,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="dashboard.php">Dashboard</a>
                         </li>
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="users.php">Users</a>
-                        </li> -->
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="features_facilities.php">Features and Facilities</a>
                         </li>
@@ -28,7 +28,7 @@
                             <a class="nav-link text-white" href="user_queries.php">User Queries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="rooms.php">Rooms</a>
+                            <a class="nav-link text-white" href="rooms.php">Destinations</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="carousel.php">Carousel</a>

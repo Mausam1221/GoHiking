@@ -9,14 +9,31 @@
 
 <link rel="stylesheet" href="css/common.css">
 
-<?php 
-
-// $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no` =?";
-// $settings_q = "SELECT * FROM `settings` where `sr_no`=?";
-// $values = [1];
-// $contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i'));
-// $settings_r = mysqli_fetch_assoc(select($settings_q, $values, 'i'));
+<?php
+session_start();
 
 
+
+
+require('admin/include/db_config.php'); //we dont need to use ../ because we use header in index.php it relocate its position from index.php
+require('admin/include/essentials.php');
+
+
+$contact_q = "SELECT * FROM `contact_details` WHERE `sr_no` =?";
+$settings_q = "SELECT * FROM `settings` WHERE `sr_no` =?";
+$values = [1];
+$contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i')); //move this lines to link.php
+$settings_r = mysqli_fetch_assoc(select($settings_q, $values, 'i')); //move this lines to link.php
+
+
+if($settings_r['shutdown']==1)
+{
+    echo<<<alertbar
+    <div class='bg-danger text-center p-2 fw-bold'>
+    <i class="bi bi-exclamation-triangle-fill"></i>
+        Bookings are temporarily closed!
+    </div> 
+    alertbar;
+}
 
 ?>

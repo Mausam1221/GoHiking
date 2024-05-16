@@ -1,18 +1,6 @@
-<?php
-require('admin/include/db_config.php'); //we dont need to use ../ because we use header in index.php it relocate its position from index.php
-require('admin/include/essentials.php');
-
-
-// $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no` =?";
-// $values = [1];
-// $contact_r = mysqli_fetch_assoc(select($contact_q, $values, 'i')); move this lines to link.php
-
-?>
-
-
 <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="index.php"><?php echo $settings_r['site_title'] ?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,7 +10,7 @@ require('admin/include/essentials.php');
                     <a class="nav-link me-2" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link me-2" href="rooms.php">Rooms</a>
+                    <a class="nav-link me-2" href="rooms.php">Destinations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link me-2" href="facilities.php">Facilities</a>
@@ -34,49 +22,79 @@ require('admin/include/essentials.php');
                     <a class="nav-link me-2" href="about.php">About Us</a>
                 </li>
             </ul>
-            <button type="submit" class="btn btn-outline-dark me-3  ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">
-                LOGIN
-            </button>
-            <button type="submit" class="btn btn-outline-dark me-3  ms-3" data-bs-toggle="modal" data-bs-target="#registerModal">
-                REGISTER
-            </button>
+            <div class="d-flex">
+                <?php 
+                    // session_destroy();
+                    // print_r($_SESSION);
+
+                    if(isset($_SESSION['login'])&& $_SESSION['login']==true)
+                    {
+                        echo <<<data
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            $_SESSION[uName]
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><a button class="dropdown-item" href="index.php">Profile</a></li>
+                            <li><a button class="dropdown-item" href="">Bookings</a></li>
+                            <li><a button class="dropdown-item" href="logout.php">Logout</a></li>
+                        </ul>
+                        </div>
+                        data;
+                    }
+                    else
+                    {
+                        echo<<<data
+                        <button type="submit" class="btn btn-outline-dark me-3  ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            LOGIN
+                        </button>
+                        <button type="submit" class="btn btn-outline-dark me-3  ms-3" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            REGISTER
+
+                        data;
+                    }
+                ?>
+                </button>
+            </div>
             <!-- Login Modal -->
             <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title d-flex align-items-center">
-                                <i class="bi bi-person-circle fs-3 me-2">
-                                </i>
-                                User Registration
-                            </h5>
-                            <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label">
-                                    Email address
-                                </label>
-                                <input type="email" class="form-control shadow-none">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">
-                                    Password
-                                </label>
-                                <input type="password" class="form-control shadow-none">
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <button type="submit" class="btn btn-dark shadow-none">
-                                    LOGIN
+                        <form id="login-form">
+                            <div class="modal-header">
+                                <h5 class="modal-title d-flex align-items-center">
+                                    <i class="bi bi-person-circle fs-3 me-2">
+                                    </i>
+                                    User Registration
+                                </h5>
+                                <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
-                                <!--default is also submit -->
-                                <a href="javascript: void(0)" class="text-decoration-none 
-                                    -secondary">
-                                    Forget Password
-                                </a>
                             </div>
-                        </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Email / Phone
+                                    </label>
+                                    <input type="text" name="email_mob" required class="form-control shadow-none">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Password
+                                    </label>
+                                    <input type="password" name="pass" required class="form-control shadow-none">
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <button type="submit" class="btn btn-dark shadow-none">
+                                        LOGIN
+                                    </button>
+                                    <!--default is also submit -->
+                                    <a href="javascript: void(0)" class="text-decoration-none 
+                                    -secondary">
+                                        Forget Password
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -146,8 +164,8 @@ require('admin/include/essentials.php');
                                 </div>
                             </div>
                             <div class="text-center my-1">
-                                <button type="submit" name="submit" class="btn btn-dark shadow-none">
-                                    REGISTERr
+                                <button type="submit" class="btn btn-dark shadow-none">
+                                    REGISTER
                                 </button>
                             </div>
                         </form>
@@ -246,12 +264,10 @@ require('admin/include/essentials.php');
 
     //         }
     //     }
-        
+
 
     //     xhr.send(data);
 
 
     // })
-
-
 </script>

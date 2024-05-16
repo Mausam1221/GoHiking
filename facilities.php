@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Login Model -Facilities
-    </title>
+
     <style>
 
 
@@ -14,9 +12,11 @@
     <?php
     require('include/links.php');
     ?>
+    <title> <?php echo $settings_r['site_title'] ?> - Facilities</title>
+
     <style>
         .pop:hover {
-            border-top-color: teal!important;
+            border-top-color: teal !important;
             transform: scale(1.03);
             transition: all 0.3s;
         }
@@ -42,14 +42,13 @@
     <div class="container">
         <div class="row">
 
-        <?php 
-        $res = selectAll('facilities');
-        $path = FACILITIES_IMG_PATH;
+        <?php
+            $res = selectAll('facilities');
+            $path = FACILITIES_IMG_PATH;
 
-        while($row=mysqli_fetch_assoc($res))
-        {
-            // print_r($row);
-            echo<<<data
+            while ($row = mysqli_fetch_assoc($res)) {
+                // print_r($row);
+                echo <<<data
                     <div class="col-lg-4 col-md-6 mb-5 px-4">
                         <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                             <div class="d-flex align-items-center mb-2">
@@ -63,11 +62,10 @@
                     </div>
 
             data;
-            
-        }
-        
+            }
+
         ?>
-            
+
 
 
         </div>

@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Login Model -About Us
-    </title>
+
     <style>
-    .box {
-        border-top: 4px solid red !important;
-    }
+        .box {
+            border-top: 4px solid red !important;
+        }
     </style>
     <?php
     require('include/links.php');
-?>
+    ?>
+    <title> <?php echo $settings_r['site_title'] ?> - About</title>
+
 
     <!-- swiperJs CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -24,7 +24,7 @@
     <!-- Navbar -->
     <?php
     require('include/header.php');
-?>
+    ?>
 
     <div class="my-5 px-4">
         <h2 class="fw-bold text-center">About Us</h2>
@@ -76,16 +76,16 @@
         </div>
     </div>
 
-<!-- management team -->
+    <!-- management team -->
     <h2 class="fw-bold text-center mt-4">Management Teams</h2>
     <div class="container px-4">
         <div class="swiper mySwiper-about">
             <div class="swiper-wrapper mb-5">
 
-            <?php 
-                $about_r=selectAll('team_details');
-                $path=ABOUT_IMG_PATH;
-                while($row=mysqli_fetch_assoc($about_r)){
+                <?php
+                $about_r = selectAll('team_details');
+                $path = ABOUT_IMG_PATH;
+                while ($row = mysqli_fetch_assoc($about_r)) {
                     echo <<<data
                         <div class="swiper-slide bg-white rounded overflow-hidden text-center">
                             <img src="$path$row[picture]" class="w-100">
@@ -94,7 +94,7 @@
 
                     data;
                 };
-            ?>
+                ?>
 
 
 
@@ -132,7 +132,7 @@
 
     <!-- Footer -->
 
-    <?php require('include/footer.php');?>
+    <?php require('include/footer.php'); ?>
 
 
 
@@ -140,29 +140,29 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-    var swiper = new Swiper(".mySwiper-about", {
-        // slidesPerView:4,
-        spaceBetween:20,
-        loop:true,
-        pagination: {
-            el: ".swiper-pagination",
-            dynamicBullets: true,
-        },
-        breakpoints: {
-            320: {
-                slidesPerView: 1,
+        var swiper = new Swiper(".mySwiper-about", {
+            // slidesPerView:4,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                dynamicBullets: true,
             },
-            640: {
-                slidesPerView: 1,
-            },
-            768: {
-                slidesPerView: 2,
-            },
-            1024: {
-                slidesPerView: 3,
-            },
-        }
-    });
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                },
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            }
+        });
     </script>
 </body>
 
