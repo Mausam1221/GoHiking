@@ -29,8 +29,8 @@ adminLogin();
                     <div class="card-body">
 
 
-                        <div class="table-responsive" style="min-width:1300px;">
-                            <table class="table table-hover border">
+                        <div class="table-responsive" style="min-width:'1300px';">
+                            <table class="table table-hover border text-center">
                                 <thead class="sticky-top">
                                     <tr class="bg-dark text-light">
                                         <th scope="col">#</th>
@@ -38,11 +38,11 @@ adminLogin();
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone no.</th>
                                         <th scope="col">Location</th>
-                                        <!-- <th scope="col" style="width: 20vw;">Password</th>  -->
-                                        <!-- <th scope="col">Verified</th>
+                                        <th scope="col">Verified</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">DOB</th>
+                                        <th scope="col">Action</th>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody id="users-data">
@@ -64,6 +64,51 @@ adminLogin();
     require('include/scripts.php');
     ?>
     <script src="scripts/users.js"></script>
+    <script>
+        function get_users() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/users.php", true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function() {
+                document.getElementById('users-data').innerHTML = this.responseText;
+            }
+
+            xhr.send('get_users');
+
+        }
+
+
+        function remove_user(user_id) {
+            if (confirm("Are you sure want to remove this user?")) {
+                let data = new FormData();
+                data.append('user_id', user_id);
+                data.append('remove_user', '');
+
+                //AJAX CALL TO HANDLE FORM SUBMISSION
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "ajax/users.php", true);
+
+                xhr.onload = function() {
+                    // console.log(this.responseText);
+
+                    if (this.responseText == 1) {
+                        alert('success', " User removed successfully!");
+                        get_users();
+
+
+                    } else {
+                        alert('error', "Cannot Delete!");
+
+                    }
+                }
+                xhr.send(data);
+            }
+        }
+        window.onload = function() {
+            get_users();
+        }
+    </script>
 </body>
 
 </html>

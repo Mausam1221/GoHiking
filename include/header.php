@@ -29,9 +29,11 @@
 
                     if(isset($_SESSION['login'])&& $_SESSION['login']==true)
                     {
+                        $path=USERS_IMG_PATH;
                         echo <<<data
                         <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        <img src="$path$_SESSION[uPic]"style="width:35px;height:35px;" class="me-1">
                             $_SESSION[uName]
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">

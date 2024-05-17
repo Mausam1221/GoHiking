@@ -77,10 +77,16 @@
                     $thumb_res = mysqli_fetch_assoc($thumb_q);
                     $room_thumb = ROOMS_IMG_PATH . $thumb_res['image'];
                 }
+                $book_btn='';
+                if(!$settings_r['shutdown'])
+                {
+                    $book_btn ="<a href='#' class='btn btn-sm text-white bg-success custom-bg shadow-none'>Book Now</a>";
+                    
+                }
                 echo <<<data
                     <div class="col-lg-4 col-md-6 my-3">
                         <div class="card border-0 shadow" style="max-width: 350px; margin: auto;"> 
-                        <img src="$room_thumb" class="card-img-top"> 
+                        <img src="$room_thumb" class="card-img-top "> 
                         <div class="card-body">
                             <h5>$room_data[name]</h5>
                             <h6 class="mb-4">$$room_data[price] per night</h6>
@@ -95,7 +101,7 @@
                                 <i class="bi bi-star-fill text-warning"></i>
                             </div>
                             <div class="d-flex justify-content-evenly mb-2 mt-2">
-                                    <a href="#" class="btn btn-sm text-white bg-success custom-bg shadow-none">Book Now</a>
+                            $book_btn
                                     <a href="room_details.php?id=$room_data[id]" class="btn btn-sm btn-outline-dark shadow-none">More Details</a>
                             </div>  
                         </div>

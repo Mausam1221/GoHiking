@@ -17,7 +17,7 @@ if (isset($_POST['register'])) {
 
 
     $u_exist = select(
-        "SELECT * FROM `user_idpw` WHERE `email`=? OR `phonenum`=? LIMIT 1",
+        "SELECT * FROM `user_cred` WHERE `email`=? OR `phonenum`=? LIMIT 1",
         [$data['email'], $data['phonenum']],
         'ss'
     );
@@ -28,52 +28,39 @@ if (isset($_POST['register'])) {
         exit;
     }
 
-    //upload image to server
-    // $img = uploadUserImage($_FILES['profile']);
+    // upload image to server
+    $img = uploadUserImage($_FILES['profile']);
 
-    //     if ($img == 'inv_img') {
-    //         echo 'inv_img';
-    //         exit;
-    //     } else if ($img == 'upd_failed') {
-    //         echo 'upd_failed';
-    //         exit;
-    //     }
+        if ($img == 'inv_img') {
+            echo 'inv_img';
+            exit;
+        } else if ($img == 'upd_failed') {
+            echo 'upd_failed';
+            exit;
+        }
 
     //send confirmation link to user's gmail
 
     $password = password_hash($data['pass'], PASSWORD_BCRYPT);
 
 
-    $query = "INSERT INTO `user_idpw`(`name`, `email`, `address`, `phonenum`, `pass`) VALUES (?,?,?,?,?)";
-    $values = [$data['name'], $data['email'], $data['address'], $data['phonenum'], $password];
+    $query= "INSERT INTO `user_cred`(`name`, `email`, `address`, `phonenum`, `pincode`, `dob`, `profile`, `password`) VALUES (?,?,?,?,?,?,?,?)";
+    $values = [$data['name'], $data['email'], $data['address'],$data['phonenum'],$data['pincode'], $data['dob'], $img, $password];
 
 
-    if(insert($query,$values,'sssss'))
+    if(insert($query,$values,'ssssssss'))
     {
         echo 1;
     }
     else{
         echo 'ins_failed';
     }
-
-
-
-    // print_r($values);
-    // insert($query,$values,'ssss');
-    //    if(insert($query,$values,'ssssss'))
-    //    {
-    //        echo 1;
-    //    }
-    //    else
-    //    {
-    //        echo 'ins_failed';
-    //    }
 }
 
 if(isset($_POST['login']))
 $data = filteration($_POST);
 // echo $data['pass'];
-$u_exist = select("SELECT * FROM `user_idpw` WHERE `email`=? OR `phonenum`=? LIMIT 1",
+$u_exist = select("SELECT * FROM `user_cred` WHERE `email`=? OR `phonenum`=? LIMIT 1",
 [$data['email_mob'], $data['email_mob']], "ss");
 
 if(mysqli_num_rows($u_exist)==0){
@@ -82,15 +69,13 @@ if(mysqli_num_rows($u_exist)==0){
 else{
     // echo "user found";
     $u_fetch = mysqli_fetch_assoc($u_exist);
-
-    if(password_verify($data['pass'], $u_fetch['pass']))
+    if(password_verify($data['password'], $u_fetch['password']))
     {
         session_start();
         $_SESSION['login']=true;
         $_SESSION['uId'] = $u_fetch['id'];
-
         $_SESSION ['uName']= $u_fetch['name'];
-        //  $_SESSION['uPic'] = $u_fetch['picture'];
+         $_SESSION['uPic'] = $u_fetch['profile'];
         $_SESSION['uPhone'] = $u_fetch['phonenum'];
         echo 1;
 

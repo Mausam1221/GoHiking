@@ -291,15 +291,15 @@ adminLogin();
     <script>
         let edit_room_form = document.getElementById('edit_room_form');
 
-        function edit_details(id) {
+        function edit_details(id) 
+        {
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "ajax/rooms.php", true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
             xhr.onload = function() {
                 let data = JSON.parse(this.responseText); //everything that comes from ajax is in text form
-                edit_room_form.elements['name'].value = data.roomdata
-                    .name; //setting data in modal data ko roomdata=>name
+                edit_room_form.elements['name'].value = data.roomdata.name; //setting data in modal data ko roomdata=>name
                 edit_room_form.elements['area'].value = data.roomdata.area;
                 edit_room_form.elements['price'].value = data.roomdata.price;
                 edit_room_form.elements['quantity'].value = data.roomdata.quantity;
@@ -322,7 +322,7 @@ adminLogin();
                 });
 
             }
-            xhr.send('get_room=' + id);
+            xhr.send('get_room='+id);
         }
 
 
@@ -367,7 +367,7 @@ adminLogin();
             //AJAX CALL TO HANDLE FORM SUBMISSION
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "ajax/rooms.php", true);
-
+ 
             xhr.onload = function() {
                 console.log(this.responseText);
 
@@ -378,6 +378,7 @@ adminLogin();
                 if (this.responseText == 1) {
                     alert('success', "Room Data Edited!");
                     edit_room_form.reset();
+                    get_all_rooms();
                     // get_features();
                 } else {
                     alert('error', "Server Down!")

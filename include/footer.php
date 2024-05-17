@@ -62,11 +62,11 @@ register_form.addEventListener('submit', (e) => {
     data.append('email', register_form.elements['email'].value);
     data.append('phonenum', register_form.elements['phonenum'].value);
     data.append('address', register_form.elements['address'].value)
-    // data.append('pincode', register_form.elements['pincode'].value)
-    // data.append('dob', register_form.elements['dob'].value);
+    data.append('pincode', register_form.elements['pincode'].value)
+    data.append('dob', register_form.elements['dob'].value);
     data.append('pass', register_form.elements['pass'].value);
     data.append('cpass', register_form.elements['cpass'].value);
-    // data.append('profile', register_form.elements['profile'].files[0]) //one file only
+    data.append('profile', register_form.elements['profile'].files[0]) //one file only
     data.append('register', '');
 
     var myModel = document.getElementById('registerModal');
@@ -109,6 +109,8 @@ register_form.addEventListener('submit', (e) => {
 
 
 })
+
+
 let login_form = document.getElementById('login-form');
 
 login_form.addEventListener('submit', (e) => {
@@ -117,7 +119,7 @@ login_form.addEventListener('submit', (e) => {
 
     let data = new FormData();
     data.append('email_mob', login_form.elements['email_mob'].value);
-    data.append('pass', login_form.elements['pass'].value);
+    data.append('password', login_form.elements['pass'].value);
     data.append('login', '');
 
     var myModel = document.getElementById('loginModal');
