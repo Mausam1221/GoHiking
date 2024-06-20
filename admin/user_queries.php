@@ -109,7 +109,7 @@ if (isset($_GET['del'])) {
                                         while($row=mysqli_fetch_assoc($data)){
                                             $seen='';
                                             if($row['seen']!=1){
-                                                $seen="<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary'>Mark as readed</a><br>";//hit the same page and get data
+                                                $seen="<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary'>Mark as read</a><br>";//hit the same page and get data
                                             }
                                             $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger mt-2'>Delete</a>";
                                             echo<<<data

@@ -80,7 +80,12 @@
                 $book_btn='';
                 if(!$settings_r['shutdown'])
                 {
-                    $book_btn ="<a href='#' class='btn btn-sm text-white bg-success custom-bg shadow-none'>Book Now</a>";
+                    $login=0;
+                    if (isset($_SESSION['login']) && $_SESSION['login'] == true) 
+                    {
+                        $login=1;
+                    }
+                    $book_btn ="<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-sm text-white bg-success custom-bg shadow-none'>Book Now</button>";
                     
                 }
                 echo <<<data
@@ -89,7 +94,7 @@
                         <img src="$room_thumb" class="card-img-top "> 
                         <div class="card-body">
                             <h5>$room_data[name]</h5>
-                            <h6 class="mb-4">$$room_data[price] per night</h6>
+                            <h6 class="mb-4">$$room_data[price] per trip</h6>
                             <div class="features mb-4">
                                 <h6 class="mb-1">Features</h6>
                             </div>

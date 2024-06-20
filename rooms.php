@@ -52,7 +52,11 @@
                     }
                 $book_btn = '';
                 if (!$settings_r['shutdown']) {
-                    $book_btn = " <a href='#' class='btn btn-sm w-100 btn-outline-dark shadow-none mb-2'>Book Now</a>";
+                    $login = 0;
+                    if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+                        $login = 1;
+                    }
+                    $book_btn = " <button onclick='checkLoginToBook($login,$room_data[id])'class='btn btn-sm w-100 btn-outline-dark shadow-none mb-2'>Book Now</button>";
                 }
                     echo<<<data
                         <div class="card mb-4 border-0 shadow">

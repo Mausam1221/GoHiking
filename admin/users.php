@@ -27,6 +27,9 @@ adminLogin();
                 <h3 class="mb-4">Users</h3>
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
+                        <div class="text-end mb-3">
+                            <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to Search...">
+                        </div>
 
 
                         <div class="table-responsive" style="min-width:'1300px';">
@@ -104,6 +107,20 @@ adminLogin();
                 }
                 xhr.send(data);
             }
+        }
+
+
+        function search_user(username) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/users.php", true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function() {
+                document.getElementById('users-data').innerHTML = this.responseText;
+            }
+
+            xhr.send('search_user&name='+username);
+
         }
         window.onload = function() {
             get_users();
