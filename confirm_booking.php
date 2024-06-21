@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Address</label>
-                                    <input name="address" type="text" class="form-control shadow-none " required rows="1"><?php echo $user_data['address'] ?></input>
+                                    <textarea name="address" type="text" class="form-control shadow-none " required rows="1"><?php echo $user_data['address'] ?></textarea>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Choose Date</label>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <h6>Total amount to pay:<?php echo "$$room_data[price]" ?></h6>
-                                    <button name="pay_now" onclick="paynow()" class="btn w-100 text-white bg-success shadow-none mb-1">Pay Now</button>
+                                    <button name="pay_now" class="btn w-100 text-white bg-success shadow-none mb-1">Pay Now</button>
                                 </div>
                             </div>
                         </form>
@@ -130,11 +130,11 @@
                 </div>
             </div>
 
-            <script>
+            <!-- <script>
                 function paynow(room_id) {
                     alert("hello");
                 }
-            </script>
+            </script> -->
 
             <!-- Footer -->
 
